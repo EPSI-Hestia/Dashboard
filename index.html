@@ -37,22 +37,32 @@
   </button>
   <ul class="dropdown-menu" aria-labelledby="dLabel">
     <li class="animate-repeat" ng-repeat="agent in agents">
-         <a ng-click="listValuesAgent(board, agent)">{{agent}}</a>
+         <a ng-click="listValuesAgent(agent)">{{agent}}</a>
     </li>
   </ul>
 </div>
 
-    <div class="col-lg-4" ng-show="valueExist" ng-repeat="values in agentValues">
-        {{board}} et {{agent}}
+<div class="row" ng-show="valueExist">
+    <div class="col-md-4" ng-repeat="values in agentValues">
+        {{currentBoard}} et {{currentAgent}}
         {{values}}
     </div>
-</div>
-<div class="row">
-    <div class="col-md-6" ng-show="valueExist">
+    <div class="col-md-4">
+        test
         <canvas id="line" class="chart chart-line" chart-data="data"
-          chart-labels="labels" chart-legend="true" chart-series="series" chart-colours="green"
+          chart-labels="labels" chart-legend="true" chart-series="series"
           chart-click="onClick" >
         </canvas>
+    </div>
+
+    <div class="col-md-4">
+      <ul class="dropdown-menu" aria-labelledby="dLabel">
+        <li>
+             <a ng-click="changeIntervalPeriod('jour')">par jour</a>
+             <a ng-click="changeIntervalPeriod('semaine')">par semaine</a>
+             <a ng-click="changeIntervalPeriod('mois')">par mois</a>
+        </li>
+      </ul>
     </div>
 </div>
 
