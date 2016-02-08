@@ -26,29 +26,28 @@ angular.module('dashboard', ['chart.js'])
             $scope.currentAgent = agent;
 
             $http({ method: 'GET',
-                url: 'http://localhost:8080/' + $scope.currentBoard + '/' + $scope.currentAgent + '/last/1',
-            }).then(function successCallback( response) {
+                url: 'http://localhost:8080/' + $scope.currentBoard + '/' + $scope.currentAgent + '/last/10',
+            }).then(function successCallback(response) {
                 $scope.valueExist = true;
-                $scope.agentValues = response.data;
+                $scope.valuesAgent = response.data;
+                console.log(response.data.datetime);
             });
         }
-console.log( $scope.agentValues);
             $scope.byMonth = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "décembre"];
             $scope.byDay = ["00h", "01h", "02h", "03h", "04h", "05h", "06h", "07h", "08h", "09h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h"];
             $scope.byWeek = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
             $scope.labels = $scope.byDay;
             $scope.data = [
-                 1,2,3
+                [65, 59, 80, 81, 56, 55, 40]
             ];
-            $scope.legend = [$scope.currentAgent];
-            $scope.series = 'valeur du capteur';
+            $scope.legend = $scope.currentAgent;
+            $scope.series = ["valeur du capteur"];
             $scope.onClick = function (points, evt) {
                 console.log(points, evt);
             };
 
         $scope.changeIntervalPeriod = function (period) {
-            console.log(period);
-            console.log(valueExist);
+            $scope.valueExist = true;
 
             if (period == 'jour') {
                 $scope.labels = $scope.byDay;
