@@ -22,26 +22,35 @@ angular.module('dashboard', ['chart.js'])
             });
         }
 
-        $scope.listValuesAgent = function(agent){
+        $scope.listValuesAgent = function(agent) {
             $scope.currentAgent = agent;
 
-            $http({ method: 'GET',
+            $http({
+                method: 'GET',
                 url: 'http://localhost:8080/' + $scope.currentBoard + '/' + $scope.currentAgent + '/last/10',
-            }).then(function successCallback(response) {
-                $scope.valueExist = true;
-                $scope.valuesAgent = response.data;
-                console.log(response.data.datetime);
-            });
-        }
-            $scope.byMonth = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "décembre"];
-            $scope.byDay = ["00h", "01h", "02h", "03h", "04h", "05h", "06h", "07h", "08h", "09h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h"];
-            $scope.byWeek = ["lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi", "dimanche"];
-            $scope.labels = $scope.byDay;
-            $scope.data = [
-                [65, 59, 80, 81, 56, 55, 40]
-            ];
+            }).then(function successsCallback(response) {
+                $scope.dates = [];
+                $scope.secondes = [];
+                angular.forEach(response.data, function (data) {
+                    this.push(parseInt(data.datetime.split("-")[1].split(":")[2]));
+                }, $scope.secondes);
+
+                $scope.secondes.sort(function (a, b) {
+                    return a - b
+                }).toString().split(",");
+
+                $scope.values = [];
+                angular.forEach(response.data, function (data) {
+                    this.push(parseFloat(data.value));
+                }, $scope.values);
+
+            $scope.data = [$scope.values];
+            $scope.labels = $scope.secondes;
+            $scope.valueExist = true;
             $scope.legend = $scope.currentAgent;
             $scope.series = ["valeur du capteur"];
+            });
+        }
             $scope.onClick = function (points, evt) {
                 console.log(points, evt);
             };

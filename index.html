@@ -45,10 +45,9 @@
 
 <div class="row" ng-show="valueExist">
 
-        {{currentBoard}} et {{currentAgent}}
+       Vous êtes sur l'arduino "{{currentBoard}}" et sur l'agent "{{currentAgent}}"
     <div class="col-md-4" ng-repeat="value in valuesAgent">
-        {{value.value}}
-        {{value.datetime}}
+        {{value.mode}}
     </div>
 </div>
 
@@ -61,7 +60,7 @@
     </div>
 
 
-    <div class="dropdown" class="col-md-4">
+   <!-- <div class="dropdown" class="col-md-4">
       <button  type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Trier valeur par
         <span class="caret"></span>
@@ -73,7 +72,7 @@
                  <a ng-click="changeIntervalPeriod('mois')">mois</a>
             </li>
           </ul>
-    </div>
+    </div> -->
 
 </div>
 
