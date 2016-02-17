@@ -2,7 +2,7 @@ $('.dropdown-toggle').dropdown();
 
 angular.module('dashboard', ['chart.js'])
 
-    .controller('dashboardCtrl', ['$scope','$http','$timeout', function ($scope, $http, $timeout){
+    .controller('dashboardCtrl', ['$scope','$http', function ($scope, $http){
         $scope.showAgent = false;
         $scope.valueExist = false;
          $scope.agentValues = {};
@@ -28,16 +28,18 @@ angular.module('dashboard', ['chart.js'])
                $http({
                    method: 'GET',
                    url: $scope.url + $scope.currentBoard + '/' + $scope.currentAgent + '/last/10',
-               }).then(function successsCallback(response) {
+               })
+                   .then(function successsCallback(response) {
                    $scope.dates = [];
                    $scope.secondes = [];
+                   $scope.values = [];
+
                    angular.forEach(response.data, function (data) {
                        this.push(parseInt(data.datetime.split("-")[1].split(":")[2]));
                    }, $scope.secondes);
 
                    getSortSecondes($scope.secondes);
 
-                   $scope.values = [];
                    angular.forEach(response.data, function (data) {
                        this.push(parseFloat(data.value));
                    }, $scope.values);
@@ -55,17 +57,19 @@ angular.module('dashboard', ['chart.js'])
                    $scope.legend = $scope.currentAgent;
                    $scope.series = ["valeur du capteur"];
                });
-           }
 
-        $scope.refreshDashboard = function(agent){
-            $scope.listValuesAgent(agent);
-        }
 
          function getSortSecondes(secondes){
                     secondes.sort(function (a, b) {
                         return a - b
                     }).toString().split(",");
                 }
+           }
+
+        $scope.refreshDashboard = function(agent){
+            $scope.listValuesAgent(agent);
+        }
+
     }]);
 
 

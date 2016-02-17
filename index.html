@@ -46,12 +46,15 @@
 <div class="row" ng-show="valueExist">
 
        Vous êtes sur l'arduino "{{currentBoard}}" et sur l'agent "{{currentAgent}}"
+
     <div class="col-md-4" ng-repeat="value in valuesAgent">
         {{value.mode}}
     </div>
+
 </div>
 
 <div class="row" ng-show="valueExist">
+
     <div class="col-md-4">
         <canvas id="line" class="chart chart-line" chart-data="data"
           chart-labels="labels" chart-legend="true" chart-series="series"
