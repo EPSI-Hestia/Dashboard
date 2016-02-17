@@ -1,4 +1,9 @@
 $('.dropdown-toggle').dropdown();
+$('#myTabs a[href="#boards"]').tab('show');
+$('#myTabs a').click(function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
 
 angular.module('dashboard', ['chart.js'])
 
@@ -6,7 +11,7 @@ angular.module('dashboard', ['chart.js'])
         $scope.showAgent = false;
         $scope.valueExist = false;
          $scope.agentValues = {};
-        $scope.url = "http://localhost:8080/";
+        $scope.url = "http://192.168.1.21:8080/";
 
         $http({method: 'GET', url: $scope.url})
             .then(function successCallback( response) {

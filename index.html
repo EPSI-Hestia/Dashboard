@@ -18,55 +18,67 @@
 
 <body ng-controller="dashboardCtrl as dashboard">
 
-<div class="dropdown">
-  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Liste des boards
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
-    <li class="animate-repeat" ng-repeat="board in boards">
-        <a ng-click="listAgentsBy(board)">{{board}}</a>
-    </li>
-  </ul>
-</div>
 
-<div class="dropdown"  ng-show="showAgent">
-  <button  type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Liste des agents
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dLabel">
-    <li class="animate-repeat" ng-repeat="agent in agents">
-         <a ng-click="listValuesAgent(agent)">{{agent}}</a>
-    </li>
-  </ul>
-</div>
-
-
-<div class="row" ng-show="valueExist">
-
-       Vous êtes sur l'arduino "{{currentBoard}}" et sur l'agent "{{currentAgent}}"
-
-    <div class="col-md-4" ng-repeat="value in valuesAgent">
-        {{value.mode}}
-    </div>
-
+ <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="active">
+        <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Liste des boards <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="animate-repeat" ng-repeat="board in boards">
+                    <a ng-click="listAgentsBy(board)">{{board}}</a>
+                </li>
+              </ul>
+        </li>
+      <li role="presentation">
+          <li class="dropdown">
+           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">liste des agents <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+               <li class="animate-repeat" ng-repeat="agent in agents">
+                     <a ng-click="listValuesAgent(agent)">{{agent}}</a>
+                </li>
+              </ul>
+        </li>
+      </li>
+    </ul>
 </div>
 
 <div class="row" ng-show="valueExist">
 
-    <div class="col-md-4">
+   <h2 class="text-center">Vous êtes sur l'arduino <mark>"{{currentBoard}}"</mark> et sur l'agent <mark>"{{currentAgent}}"</mark></h2>
+
+</div>
+<div class="row"><div class="col-sm-8"></div></div>
+
+<div class="row" ng-show="valueExist">
+
+    <div class="col-sm-4">
         <canvas id="line" class="chart chart-line" chart-data="data"
           chart-labels="labels" chart-legend="true" chart-series="series"
           chart-click="onClick" >
         </canvas>
     </div>
-    <div>
-        Plus petite valeur reçue: {{min}}
-        Plus grande valeur reçue: {{max}}
-        Moyenne des valeurs: {{average}}
-        Dernière valeur enregistrée: {{lastValue}}
-        <button type="button" ng-click="refreshDashboard(currentAgent)">Refresh</button>
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="col-sm-2">small value</th>
+                <th class="col-sm-2">medium value</th>
+                <th class="col-sm-2">largest value</th>
+                <th class="col-sm-2">last value</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td>{{min}}</td>
+                <td>{{max}}</td>
+                <td>{{average}}</td>
+                <td>{{lastValue}}</td>
+            </tr>
+            <tr><td colspan="4"><button type="button"  class="btn btn-info pull-right" ng-click="refreshDashboard(currentAgent)">Refresh</button></td></tr>
+            </tbody>
+    </table>
     </div>
 </div>
 
