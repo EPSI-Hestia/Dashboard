@@ -59,24 +59,34 @@
         </canvas>
     </div>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
             <tr>
-                <th class="col-sm-2">small value</th>
-                <th class="col-sm-2">medium value</th>
-                <th class="col-sm-2">largest value</th>
-                <th class="col-sm-2">last value</th>
+                <th>
+                <div class="media">
+                  <div class="media-left">
+                    <a href="#">
+                      <img class="media-object" width="50px" src="images/hestia_logo.png" alt="Hestia">
+                    </a>
+                  </div>
+                </div>
+                </th>
+                <th>small value</th>
+                <th>medium value</th>
+                <th>largest value</th>
+                <th>last value</th>
             </tr>
             </thead>
             <tbody>
 
             <tr>
-                <td>{{min}}</td>
-                <td>{{max}}</td>
-                <td>{{average}}</td>
-                <td>{{lastValue}}</td>
+                <td></td>
+                <td><span class="badge">{{min}}</span></td>
+                <td><span class="badge">{{max}}</span></td>
+                <td><span class="badge">{{average}}</span></td>
+                <td><span class="badge">{{lastValue}}</span></td>
             </tr>
-            <tr><td colspan="4"><button type="button"  class="btn btn-info pull-right" ng-click="refreshDashboard(currentAgent)">Refresh</button></td></tr>
+            <tr><td colspan="5"><button type="button" class="btn btn-info pull-right" ng-click="refreshDashboard(currentAgent)">Refresh</button></td></tr>
             </tbody>
     </table>
     </div>
